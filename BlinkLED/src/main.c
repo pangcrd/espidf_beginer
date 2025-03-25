@@ -28,11 +28,11 @@ void led_blink(void *pvParams) {
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT); /** GPIO as OUTPUT */
 
     while (1) {
-        gpio_set_level(LED_PIN, 0);          /**  LED ON */
+        gpio_set_level(LED_PIN, 1);          /**  LED ON */
         ESP_LOGI(TAG, "LED ON!");
         vTaskDelay(pdMS_TO_TICKS(1000));     /** Delay 1000ms */ 
 
-        gpio_set_level(LED_PIN, 1);          /** LED OFF */
+        gpio_set_level(LED_PIN, 0);          /** LED OFF */
         ESP_LOGI(TAG, "LED OFF!");
         vTaskDelay(pdMS_TO_TICKS(1000));     /** Delay 1000ms */
     }
