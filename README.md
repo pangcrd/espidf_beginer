@@ -7,7 +7,8 @@ https://youtu.be/tDh9iNSV2l0
 ### ESP-IDF Extension for VS Code.  
 ```sh
 https://github.com/espressif/vscode-esp-idf-extension
-``` 
+```
+
 ### idf.py basic command.  
 | COMMAND                     | DESCRIPTION                     |
 |-----------------------------|---------------------------------|
@@ -27,9 +28,27 @@ https://github.com/espressif/vscode-esp-idf-extension
 ### Create components folder in project (if not already exists)  .
 ```sh 
 mkdir -p components
-``` 
-### ESP-IDF Components library  
+```
+### Add this command if u are using platformio with esp-idf
+**CMakeList.txt** in project folder tree
+```sh
+ set(EXTRA_COMPONENT_DIRS "${CMAKE_CURRENT_LIST_DIR}/src")
+```
+### ESP-IDF Sensor Components library  
 ```sh
 git clone https://github.com/UncleRus/esp-idf-lib
-``` 
+```
+### ESP-IDF Component Manager from Espressif
+```sh
+https://components.espressif.com/components/
+```
+### Create idf_component.yml download components
+Example
+```sh
+idf.py add-dependency -p src "lvgl/lvgl^9.3.0"
+```
+Must RUN this command to download components
+```sh
+idf.py reconfigure
+```
 
