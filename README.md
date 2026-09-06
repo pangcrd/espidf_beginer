@@ -29,10 +29,11 @@ https://github.com/espressif/vscode-esp-idf-extension
 ```sh 
 mkdir -p components
 ```
-### Add this command if u are using platformio with esp-idf
+### Add this command if u are using platformio with esp-idf with C++
 **CMakeList.txt** in project folder tree
 ```sh
  set(EXTRA_COMPONENT_DIRS "${CMAKE_CURRENT_LIST_DIR}/src")
+ include_directories(${CMAKE_CURRENT_LIST_DIR}/src) 
 ```
 ### ESP-IDF Sensor Components library  
 ```sh
