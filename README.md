@@ -9,7 +9,7 @@ https://youtu.be/tDh9iNSV2l0
 https://github.com/espressif/vscode-esp-idf-extension
 ```
 
-### idf.py basic command.  
+### ESP-IDF basic command with VS code.  
 | COMMAND                     | DESCRIPTION                     |
 |-----------------------------|---------------------------------|
 | `Ctrl+E release, then press T`   | Open ESP-IDF Terminal               |
@@ -33,10 +33,13 @@ https://github.com/espressif/vscode-esp-idf-extension
 mkdir -p components
 ```
 ### Add this command if u are using platformio with esp-idf with C++
-**CMakeList.txt** in project folder tree
+**CMakeList.txt** in project folder tree  
+
 ```sh
- set(EXTRA_COMPONENT_DIRS "${CMAKE_CURRENT_LIST_DIR}/src")
- include_directories(${CMAKE_CURRENT_LIST_DIR}/src) 
+include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+set(EXTRA_COMPONENT_DIRS "${CMAKE_CURRENT_LIST_DIR}/src")
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src) 
+
 ```
 ### ESP-IDF Sensor Components library  
 ```sh
