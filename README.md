@@ -12,6 +12,9 @@ https://github.com/espressif/vscode-esp-idf-extension
 ### idf.py basic command.  
 | COMMAND                     | DESCRIPTION                     |
 |-----------------------------|---------------------------------|
+| `Ctrl+E release, then press T`   | Open ESP-IDF Terminal               |
+| `Ctrl+E release, then press B`   | Quick build project                |
+| `Ctrl+E release, then press F`   | Quick flash firmware                |
 | `idf.py set-target esp32`   | Select ESP32 chip               |
 | `idf.py menuconfig`         | Open configuration interface    |
 | `idf.py build`              | Build project                   |
