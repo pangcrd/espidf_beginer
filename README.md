@@ -50,9 +50,13 @@ git clone https://github.com/UncleRus/esp-idf-lib
 https://components.espressif.com/components/
 ```
 ### Create idf_component.yml download components
-Example
+Command for platformio
 ```sh
-idf.py add-dependency -p src "lvgl/lvgl^9.3.0"
+idf.py add-dependency -p src "lvgl/lvgl^9.5.0"
+```
+Command for ESP-IDF
+```sh
+idf.py add-dependency "lvgl/lvgl^9.5.0"
 ```
 Must RUN this command to download components
 ```sh
