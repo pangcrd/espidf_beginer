@@ -19,7 +19,7 @@ https://github.com/espressif/vscode-esp-idf-extension
 | `idf.py menuconfig`         | Open configuration interface    |
 | `idf.py build`              | Build project                   |
 | `idf.py flash`              | Flash firmware                  |
-| `idf.py flash -p COMx`      | Flash firmware with COM port    |
+| `idf.py -p COMx flash `      | Flash firmware with COM port    |
 | `idf.py monitor`            | Serial Monitor                  |
 | `idf.py monitor -b 115200`  | Select baudrate Serial Monitor  |
 | `idf.py flash monitor`      | Build + Flash + Monitor         |
@@ -32,7 +32,7 @@ https://github.com/espressif/vscode-esp-idf-extension
 ```sh 
 mkdir -p components
 ```
-### Add this command if u are using platformio with esp-idf with C++
+### Add this command if u are using platformio with ESP-IDF
 **CMakeList.txt** in project folder tree  
 
 ```sh
