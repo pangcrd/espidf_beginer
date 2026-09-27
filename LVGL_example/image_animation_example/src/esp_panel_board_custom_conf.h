@@ -474,7 +474,7 @@
     /**
      * @brief Backlight control pin configuration
      */
-    #define ESP_PANEL_BOARD_BACKLIGHT_IO        (0)    // Output GPIO pin number
+    #define ESP_PANEL_BOARD_BACKLIGHT_IO        (1)    // Output GPIO pin number
     #define ESP_PANEL_BOARD_BACKLIGHT_ON_LEVEL  (1)     // Active level, 0: low, 1: high
 
 #if ESP_PANEL_BOARD_BACKLIGHT_TYPE == ESP_PANEL_BACKLIGHT_TYPE_PWM_LEDC
