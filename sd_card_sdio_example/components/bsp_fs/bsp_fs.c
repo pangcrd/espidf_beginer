@@ -136,3 +136,53 @@ esp_err_t bsp_fs_list_dir(const char *path, bsp_fs_list_cb_t cb, void *ctx)
     closedir(d);
     return ESP_OK;
 }
+
+esp_err_t bsp_fs_create_dir_recursive(const char *path)
+{
+    if (!path || path[0] != '/') return ESP_ERR_INVALID_ARG;
+
+    size_t len = strlen(path);
+    char *tmp = malloc(len + 1);
+    if (!tmp) return ESP_ERR_NO_MEM;
+    memcpy(tmp, path, len + 1);
+
+    // Bỏ dấu '/' thừa ở cuối
+    while (len > 1 && tmp[len - 1] == '/') tmp[--len] = '\0';
+
+    esp_err_t ret = ESP_OK;
+    for (size_t i = 1; i <= len && ret == ESP_OK; i++) {
+        if (tmp[i] != '/' && tmp[i] != '\0') continue;
+        if (tmp[i - 1] == '/') continue;              // bỏ qua "//"
+
+        char saved = tmp[i];
+        tmp[i] = '\0';
+        if (!bsp_fs_is_dir(tmp)) {                    // đã có thì thôi (kể cả "/sdcard")
+            if (mkdir(tmp, 0775) != 0 && errno != EEXIST) {
+                ESP_LOGE(TAG, "mkdir %s failed: errno %d", tmp, errno);
+                ret = ESP_FAIL;
+            }
+        }
+        tmp[i] = saved;
+    }
+
+    free(tmp);
+    return ret;
+}
+
+esp_err_t bsp_fs_create_file_p(const char *path, const void *data, size_t len)
+{
+    if (!path) return ESP_ERR_INVALID_ARG;
+
+    const char *slash = strrchr(path, '/');
+    if (slash && slash != path) {
+        size_t dlen = slash - path;
+        char *dir = malloc(dlen + 1);
+        if (!dir) return ESP_ERR_NO_MEM;
+        memcpy(dir, path, dlen);
+        dir[dlen] = '\0';
+        esp_err_t ret = bsp_fs_create_dir_recursive(dir);
+        free(dir);
+        if (ret != ESP_OK) return ret;
+    }
+    return bsp_fs_create_file(path, data, len);
+}

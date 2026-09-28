@@ -23,6 +23,9 @@ esp_err_t bsp_fs_create_dir(const char *path);   // OK nếu đã tồn tại
 esp_err_t bsp_fs_delete_dir(const char *path);   // chỉ xoá thư mục rỗng
 esp_err_t bsp_fs_delete_recursive(const char *path); // xoá cả cây
 
+esp_err_t bsp_fs_create_dir_recursive(const char *path);             
+esp_err_t bsp_fs_create_file_p(const char *path, const void *data, size_t len); // tự tạo thư mục cha
+
 esp_err_t bsp_fs_list_dir(const char *path, bsp_fs_list_cb_t cb, void *ctx);
 
 #ifdef __cplusplus

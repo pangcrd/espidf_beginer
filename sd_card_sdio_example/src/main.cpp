@@ -22,6 +22,7 @@ extern "C" void app_main(void)
 
     //bsp_fs_create_dir("/sdcard/images");
     bsp_fs_create_file("/sdcard/images/hello.txt", "hi", 2);
+    //bsp_fs_create_dir_recursive("/sdcard/a/b/c");
     //bsp_fs_list_dir("/sdcard", print_entry, NULL);
     //bsp_fs_delete_recursive("/sdcard/images");
 }
