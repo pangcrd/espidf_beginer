@@ -244,3 +244,44 @@ esp_err_t bsp_fs_read_file_psram(const char *path, uint8_t **out, size_t *out_le
     *out_len = done;
     return ESP_OK;
 }
+static bool has_ext(const char *name, const char *ext)
+{
+    size_t nlen = strlen(name), elen = strlen(ext);
+    if (nlen < elen) return false;
+    return strcasecmp(name + nlen - elen, ext) == 0;
+}
+
+static int cmp_str(const void *a, const void *b)
+{
+    return strcmp((const char *)a, (const char *)b);
+}
+
+typedef struct {
+    char (*names)[256];
+    int max, count;
+    const char *ext;
+} list_ctx_t;
+
+static bool collect_cb(const char *name, bool is_dir, size_t size, void *ctx)
+{
+    (void)size;
+    list_ctx_t *c = (list_ctx_t *)ctx;
+    if (is_dir) return true;
+    if (!has_ext(name, c->ext)) return true;
+    if (c->count >= c->max) return false;   // đủ rồi thì dừng duyệt
+    strncpy(c->names[c->count], name, 255);
+    c->names[c->count][255] = '\0';
+    c->count++;
+    return true;
+}
+
+int bsp_fs_list_by_ext(const char *dir, const char *ext, char names[][256], int max_count)
+{
+    if (!dir || !ext || !names || max_count <= 0) return 0;
+
+    list_ctx_t ctx = { .names = names, .max = max_count, .count = 0, .ext = ext };
+    bsp_fs_list_dir(dir, collect_cb, &ctx);
+
+    qsort(names, ctx.count, 256, cmp_str);
+    return ctx.count;
+}
